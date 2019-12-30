@@ -61,7 +61,7 @@ class Profile extends Component {
       });
     } else {
       try {
-        const response = await axios.get('http://localhost:3000/api/findUser', {
+        const response = await axios.get('http://localhost:5000/users/findUser', {
           params: {
             username,
           },
@@ -101,7 +101,7 @@ class Profile extends Component {
 
     e.preventDefault();
     try {
-      const response = await axios.delete('http://localhost:3000/api/deleteUser', {
+      const response = await axios.delete('http://localhost:5000/users/deleteUser', {
         params: {
           username,
         },

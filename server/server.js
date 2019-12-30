@@ -1,15 +1,17 @@
-import express from 'express';
-import Cors from 'cors';
-import bodyParser from 'body-parser';
-import logger from 'morgan';
-import passport from 'passport';
-import helmet from 'helmet';
-
+const express = require('express');
+const Cors = require('cors');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const passport = require('passport');
+const helmet = require('helmet');
 const app = express();
 
-const API_PORT = process.env.API_PORT || 3000;
+const API_PORT = process.env.API_PORT || 5000;
 
-const routes = require('./routes/index');
+const db = require('./sequelize');
+// const routes = require('./routes1/index');
+const authUserRoute = require('./Routes/authUser');
+const employeeRoute = require('./Routes/authEmployee');
 require('./config/passport');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -20,7 +22,7 @@ app.use(helmet());
 app.use(passport.initialize());
 app.use((req,res,next)=>{
     console.log(req.originalUrl);
-    console.log(req.body);
+    console.log('req body ', req.body);
     next();
 })
 
@@ -33,7 +35,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api', routes)
+// force: true will drop the table if it already exists
+// db.sync({force: true}).then(() => {
+//   console.log('Drop and Resync with { force: true }');
+// });
+db.sync().then(() => {
+    console.log('Database Connected and Syncing start');
+});
+
+app.use('/users', authUserRoute);
+app.use('/employee', employeeRoute);
 app.use(express.static("public"));
 app.listen(API_PORT, () => console.log(`Listening on port ${API_PORT}`));
 

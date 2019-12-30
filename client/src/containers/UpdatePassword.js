@@ -55,7 +55,7 @@ class UpdatePassword extends Component {
         },
       } = this.props;
       try {
-        const response = await axios.get('http://localhost:3000/api/findUser', {
+        const response = await axios.get('http://localhost:5000/users/findUser', {
           params: {
             username,
           },
@@ -95,7 +95,7 @@ class UpdatePassword extends Component {
       const { username, password } = this.state;
       try {
         const response = await axios.put(
-          'http://localhost:3000/api/updatePassword',
+          'http://localhost:5000/users/updatePassword',
           {
             username,
             password,

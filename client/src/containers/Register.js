@@ -55,7 +55,7 @@ class Register extends Component {
     } else {
       try {
         const response = await axios.post(
-          'http://localhost:3000/api/registerUser',
+          'http://localhost:5000/users/registerUser',
           {
             first_name,
             last_name,

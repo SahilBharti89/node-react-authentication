@@ -49,7 +49,7 @@ class Login extends Component {
       });
     } else {
       try {
-        const response = await axios.post('http://localhost:3000/api/loginUser', {
+        const response = await axios.post('http://localhost:5000/users/loginUser', {
           username,
           password,
         });

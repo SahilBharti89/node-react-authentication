@@ -1,21 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import {isLogin}  from '../utils';
+import { isLogin }  from '../utils';
 
 const PublicRoute = ({ component: Component, restricted, ...rest}) => {
-    <Route {...rest} render={props => {
-        return (
+    return (
         // restricted = false meaning public route
         // restricted = true meaning restricted route
         //     localStorage.getItem('user') === null ? 
         // <Component {...props} /> : 
         // <Redirect to={{ pathname: "/userProfile/:username", state: { from: props.location }}}/>
-
-        isLogin.isLogin() && restricted ?
-           
+        <Route {...rest} render={props =>(
+            isLogin() && restricted ?
             <Redirect to="/userProfile/:username" /> : 
             <Component {...props} />
-            )
-        }} />
-}
+        )} />
+    );
+};
 export default PublicRoute;

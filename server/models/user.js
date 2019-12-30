@@ -1,54 +1,28 @@
-/* eslint-disable indent */
-/**
- * @swagger
- * definitions:
- *   User:
- *     type: object
- *     properties:
- *       id:
- *         type: integer
- *       first_name:
- *         type: string
- *       last_name:
- *         type: integer
- *       email:
- *         type: string
- *       username:
- *         type: string
- *       password:
- *         type: string
- *         format: password
- *       resetPasswordToken:
- *         type: string
- *       resetPasswordExpires:
- *         type: string
- *         format: date-time
- *       required:
- *         - email
- *         - username
- *         - password
- */
+const Sequelize = require('sequelize');
+var sequelize = require('../sequelize');
 
-module.exports = (sequelize, type) => sequelize.define('user', {
+ var User = sequelize.define('user', {
     id: {
-      type: type.INTEGER,
+      type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    first_name: type.STRING,
-    last_name: type.STRING,
+    first_name: Sequelize.STRING,
+    last_name: Sequelize.STRING,
     email: {
-      type: type.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     username: {
-      type: type.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
     password: {
-      type: type.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
     },
-    resetPasswordToken: type.STRING,
-    resetPasswordExpires: type.DATE,
+    resetPasswordToken: Sequelize.STRING,
+    resetPasswordExpires: Sequelize.DATE,
   });
+
+  module.exports = User;

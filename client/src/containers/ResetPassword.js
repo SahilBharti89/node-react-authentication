@@ -44,7 +44,7 @@ export default class ResetPassword extends Component {
       },
     } = this.props;
     try {
-      const response = await axios.get('http://localhost:3000/api/reset', {
+      const response = await axios.get('http://localhost:5000/users/reset', {
         params: {
           resetPasswordToken: token,
         },
@@ -84,7 +84,7 @@ export default class ResetPassword extends Component {
     } = this.props;
     try {
       const response = await axios.put(
-        'http://localhost:3000/api/updatePasswordViaEmail',
+        'http://localhost:5000/users/updatePasswordViaEmail',
         {
           username,
           password,

@@ -10,6 +10,7 @@ export const logout = () => {
 
 export const isLogin = () => {
     if (localStorage.getItem('JWT')) {
+        console.log('jwt token', localStorage.getItem('JWT'))
         return true;
     }
 
